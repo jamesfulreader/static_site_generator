@@ -1,17 +1,16 @@
 import os
 import shutil
 
-def copy_files_recursive(source_dir_path, destination_dir_path):
-  if not os.path.exists(destination_dir_path):
-    os.mkdir(destination_dir_path)
 
-  for filename in os.listdir(source_dir_path):
-    source_path = os.path.join(source_dir_path, filename)
-    destination_path = os.path.join(destination_dir_path, filename)
+def copy_files_recursive(source_dir_path, dest_dir_path):
+    if not os.path.exists(dest_dir_path):
+        os.mkdir(dest_dir_path)
 
-    print(f"moving * {source_path} to {destination_path}")
-
-    if os.path.isfile(source_path, destination_path):
-      shutil.copy(source_path, destination_path)
-    else:
-      copy_files_recursive(source_path, destination_path)
+    for filename in os.listdir(source_dir_path):
+        from_path = os.path.join(source_dir_path, filename)
+        dest_path = os.path.join(dest_dir_path, filename)
+        print(f" * {from_path} -> {dest_path}")
+        if os.path.isfile(from_path):
+            shutil.copy(from_path, dest_path)
+        else:
+            copy_files_recursive(from_path, dest_path)
